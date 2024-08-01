@@ -1,13 +1,13 @@
-CC	=	gcc
+CC	=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-g -Wall -Wextra -Werror
 
 NAME	=	fract-ol
 
 # NAME_BONUS =
 
-SRCS	=		exemple.c\
-				exemple2
+SRCS	=		utils.c\
+				main.c
 
 # SRCS_BONUS =
 
@@ -15,14 +15,19 @@ OBJS	=	$(SRCS:.c=.o)
 
 # OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
+MLX_PATH =
+MLX = -Lminilibx-linux -lmlx_Linux -lX11 -lXext
+
+
 all	:	$(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME)	:	$(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-
+		@make -C minilibx-linux/
+		$(CC) $(OBJS) $(MLX) -o $(NAME)
+# (CFLAGS)
 clean	:
 		rm -rf $(OBJS)
 
