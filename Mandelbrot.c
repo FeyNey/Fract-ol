@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:59:50 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/01 16:31:01 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/02 20:47:05 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,30 @@ x^2 - y^2 + 2xyi;
 int	Mandelbrot(void)
 {
 	int i;
-	t_mandelbrot z;
-	t_mandelbrot c;
-	double tmp_real;
+	t_complex z;
+	t_complex c;
+	double tmp_z;
 
 	i = 0;
 
-	z.real = 0;
-	z.i = 0;
+	z.x = 0;
+	z.y = 0;
 
-	c.real = 0.10;
-	c.i = 0.4;
+	c.x = 0.10;
+	c.y = 0.4;
 
 	while(i < 42)
 	{
 		//general formula
 		// z = z^2 + c
-	tmp_real = (z.real * z.real) - (z.i * z.i);
-	z.i = 2 * z.real * z.i;
-	z.real = tmp_real;
-	z.real += c.real;
-	z.i += c.i;
+	tmp_z = (z.x * z.x) - (z.y * z.y);
+	z.y = 2 * z.x * z.y;
+	z.x = tmp_z;
+	z.x += c.x;
+	z.y += c.y;
 		i++;
 
-	printf("iteration n -> %d real %f imaginary %f\n", i, z.real, z.i);
+	printf("iteration n -> %d z %f imaginary %f\n", i, z.x, z.y);
 	}
 }
 

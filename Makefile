@@ -26,7 +26,7 @@ all	:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 		@make -C minilibx-linux/
-		$(CC) $(OBJS) $(MLX) -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJS) $(MLX) -o $(NAME)
 # (CFLAGS)
 clean	:
 		rm -rf $(OBJS)

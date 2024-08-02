@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:00:14 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/02 00:09:44 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/02 20:42:24 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,23 @@
 # include <math.h>
 # include "minilibx-linux/mlx.h"
 
-typedef struct	s_mandelbrot
+typedef struct	s_complex
 {
-	double	real;
-	double	i;
+	// real
+	double	x;
+	// imaginary
+	double	y;
 
+}	t_complex;
 
-}	t_mandelbrot;
+typedef struct	s_upscale
+{
+	double	unscaled_num;
+	double	new_min;
+	double	new_max;
+	double	old_min;
+	double	old_max;
+}			t_scale;
 
 typedef struct	s_img // values from mlx_get_data_adress
 {
@@ -38,7 +48,7 @@ typedef struct	s_img // values from mlx_get_data_adress
 	int		bpp;
 	int		line_lenght;
 	int		endian;
-	t_mandelbrot	m; // maldelbrot values
+	t_complex	m; // maldelbrot values
 }				t_img;
 
 typedef struct s_fractol
@@ -47,13 +57,13 @@ typedef struct s_fractol
 	void	*win; // mlx_window
 	char	*name; // fractol name
 	t_img	img; // mlx_get_data_adress
-
 }	t_fractol;
-
-
 
 int		ft_strcmp(char *s1, char *s2);
 void	chekargs(int argc, char **argv);
-
+void	fractol_render(t_fractol *f);
+void	fractol_init(t_fractol *f);
+double	scale(t_scale s);
+void	handle_pixel(int x, int y, t_fractol *f);
 
 #endif

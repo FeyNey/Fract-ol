@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:45:34 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/02 00:24:40 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/02 00:29:44 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,6 @@ void	fractol_init(t_fractol *f)
 	// events_init
 	// data_init
 }
-
-void	fractol_render(t_fractol *f)
-{
-
-}
-
 
 void	ft_fract_ol(t_fractol f)
 {
