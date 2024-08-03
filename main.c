@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:45:34 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/02 00:29:44 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/03 16:50:32 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,6 @@ void	chekargs(int argc, char **argv)
 		write(1, "Try ./fract-ol mandelbrot | or | julia x y\n", 43);
 		exit(EXIT_FAILURE);
 	}
-}
-
-void	ft_malloc_error() //may be static
-{
-	perror("Problems with malloc");
-	exit(EXIT_FAILURE);
-}
-
-void	fractol_init(t_fractol *f)
-{
-	f->ptr = mlx_init();
-	if (f->ptr == NULL)
-		ft_malloc_error();
-	f->win = mlx_new_window(f->ptr, WIDTH, HEIGHT, f->name);
-	if (f->win == NULL)
-	{
-		mlx_destroy_display(f->ptr);
-		free(f->ptr);
-		ft_malloc_error;
-	}
-	f->img.img_ptr =  mlx_new_image(f->ptr, WIDTH, HEIGHT);
-	if (f->img.img_ptr == NULL)
-	{
-		mlx_destroy_window(f->win, f->ptr);
-		mlx_destroy_display(f->ptr);
-		free (f->ptr);
-		ft_malloc_error();
-	}
-	f->img.data = mlx_get_data_addr(f->img.img_ptr, &f->img.bpp,
-									&f->img.line_lenght, &f->img.endian);
-	// HOOK events
-	// events_init
-	// data_init
 }
 
 void	ft_fract_ol(t_fractol f)

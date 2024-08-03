@@ -6,16 +6,22 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 00:26:08 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/02 00:31:19 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/03 16:16:23 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract-ol.h"
 
-static void	ft_malloc_error() //may be static
+void	ft_malloc_error() //may be static
 {
 	perror("Problems with malloc");
 	exit(EXIT_FAILURE);
+}
+
+void	data_init(t_fractol *f)
+{
+	f->escape_value = 4;
+	f->iteration_definition = 42;
 }
 
 void	fractol_init(t_fractol *f)
@@ -40,6 +46,7 @@ void	fractol_init(t_fractol *f)
 	}
 	f->img.data = mlx_get_data_addr(f->img.img_ptr, &f->img.bpp,
 									&f->img.line_lenght, &f->img.endian);
+	data_init(f);
 	// HOOK events
 	// events_init
 	// data_init

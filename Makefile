@@ -7,7 +7,10 @@ NAME	=	fract-ol
 # NAME_BONUS =
 
 SRCS	=		utils.c\
-				main.c
+				main.c\
+				init.c\
+				render.c\
+				math.c
 
 # SRCS_BONUS =
 
@@ -26,8 +29,8 @@ all	:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 		@make -C minilibx-linux/
-		$(CC) $(CFLAGS) $(OBJS) $(MLX) -o $(NAME)
-# (CFLAGS)
+		$(CC) $(CFLAGS) -O3 $(OBJS) $(MLX) -o $(NAME)
+
 clean	:
 		rm -rf $(OBJS)
 
