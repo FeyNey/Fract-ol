@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:00:14 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/03 20:45:08 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/05 22:54:17 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 # define WIDTH 1000
 # define HEIGHT 1000
-# define MAX_ITER 100
 
 # include <unistd.h> // write
 # include <stdio.h> //printf pas autorise
 # include <stdlib.h> // malloc / free
 # include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include "minilibx-linux/mlx.h"
 
 #define BLACK   0x000000
@@ -32,6 +33,8 @@
 
 #define PURPLE 0x660066
 #define LIME   0xCCFF00
+#define SBLACK 0xFFFFFF
+#define SRED   0xFF3A00
 
 typedef struct	s_complex
 {
@@ -71,19 +74,25 @@ typedef struct s_fractol
 	t_scale	scale;
 	double	escape_value;
 	int		iteration_definition;
+	double	shift_x;
+	double	shift_y;
+	double	zoom;
 }	t_fractol;
 
-int		ft_strcmp(char *s1, char *s2);
-void	chekargs(int argc, char **argv);
-void	fractol_render(t_fractol *f);
-void	fractol_init(t_fractol *f);
-void	ft_malloc_error();
-void	handle_pixel(int x, int y, t_fractol *f);
-void	my_pixel_put(int x, int y, t_img *img, int color);
+int			ft_strcmp(char *s1, char *s2);
+void		chekargs(int argc, char **argv);
+void		fractol_render(t_fractol *f);
+void		fractol_init(t_fractol *f);
+void		ft_malloc_error();
+void		handle_pixel(int x, int y, t_fractol *f);
+void		my_pixel_put(int x, int y, t_img *img, int color);
 t_complex	square_complex(t_complex z);
 t_complex	sum_complexe(t_complex z1, t_complex z2);
 double		scale(double unscaled_num, double new_min, double new_max, t_scale *t);
 t_complex	square_complex(t_complex z);
 t_complex	sum_complex(t_complex z1, t_complex z2);
+int			key_handle(int keysym, t_fractol *f);
+int			close_handler(t_fractol *f);
+int			mouse_handle(int button, int x, int y, t_fractol *f);
 
 #endif

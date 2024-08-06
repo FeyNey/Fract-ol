@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:45:34 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/03 16:50:32 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/06 12:30:26 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	chekargs(int argc, char **argv)
 	}
 }
 
-void	ft_fract_ol(t_fractol f)
+void	ft_fract_ol(t_fractol f, char **argv)
 {
 	fractol_init(&f);
-	fractol_render(&f);
+	fractol_render(&f, argv);
 	mlx_loop(f.ptr);
 }
 
@@ -41,6 +41,6 @@ int main(int argc, char **argv)
 
 	f.name = argv[1];
 	chekargs(argc, argv);
-	ft_fract_ol(f);
+	ft_fract_ol(f, argv);
 }
 

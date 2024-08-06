@@ -1,6 +1,6 @@
 CC	=	cc
 
-CFLAGS	=	-g -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -O3
 
 NAME	=	fract-ol
 
@@ -10,7 +10,8 @@ SRCS	=		utils.c\
 				main.c\
 				init.c\
 				render.c\
-				math.c
+				math.c\
+				hook.c
 
 # SRCS_BONUS =
 
@@ -29,8 +30,7 @@ all	:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 		@make -C minilibx-linux/
-		$(CC) $(CFLAGS) -O3 $(OBJS) $(MLX) -o $(NAME)
-
+		$(CC) $(CFLAGS) $(OBJS) $(MLX) -o $(NAME)
 clean	:
 		rm -rf $(OBJS)
 

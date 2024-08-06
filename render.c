@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 00:27:02 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/03 20:46:17 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/06 12:44:23 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,23 @@ void	my_pixel_put(int x, int y, t_img *img, int color)
 	*(unsigned int *)(img->data + offset) = color;
 }
 
+t_complex	mandelbrot_render(int x, int y, t_fractol *f)
+{
+	t_complex	z;
+	t_complex	c;
+	t_scale		s;
 
-void	handle_pixel(int x, int y, t_fractol *f)
+	z.x = 0.0;
+	z.y = 0.0;
+	s.old_min = 0;
+	s.old_max = WIDTH;
+	c.x = (scale(x, -2, +2, &s) * f->zoom) + f->shift_x;
+	s.old_max = (scale(y, +2, -2, &s) * f->zoom) + f->shift_y;
+	return (c);
+}
+
+
+void	handle_pixel(int x, int y, t_fractol *f, char **argv)
 {
 	t_complex	z;
 	t_complex	c;
@@ -32,34 +47,40 @@ void	handle_pixel(int x, int y, t_fractol *f)
 	int			i;
 	double			color;
 
+	if (ft_strcmp(argv[1], "mandelbrot") == 0
+	|| ft_strcmp(argv[1], "Mandelbrot") == 0)
+		mandelbrot_render(x, y, f);
+
+	if (ft_strcmp(argv[1], "julia") == 0
+		|| ft_strcmp(argv[1], "Julia") == 0)
+		julia_render(x, y, f, argv);
 // iterations
 	z.x = 0.0;
 	z.y = 0.0;
-	s.old_min = WIDTH;
-	c.x = scale(x, -2, +2, &s); // problem de old.max
-	s.old_min = HEIGHT;
-	c.x = scale(y, +2, -2, &s); //proble de old max
-	printf(RED "PROBLEME DE OLD MAX A MODIFIER" RESET);
+	s.old_min = 0;
+	s.old_max = WIDTH;
+	c.x = (scale(x, -2, +2, &s) * f->zoom)+ f->shift_x;
+	s.old_max = HEIGHT;
+	c.y = (scale(y, +2, -2, &s) * f->zoom)+ f->shift_y;
 	i = 0;
-	s.iteration_definition = f->iteration_definition;
-	while (i < f->escape_value)//nbr iteration //verif
+	s.old_min = 0;
+	s.old_max = f->iteration_definition;
+	while (i < f->iteration_definition)//nbr iteration //verif
 	{
 		// z carre + c;
 		z = sum_complexe(square_complex(z), c);
-		if ((z.x) * (z.x) + (z.y) * (z.y) > f->escape_value) // the point has escape
+		if ((z.x * z.x) + (z.y * z.y) > f->escape_value)
 		{
 			color = scale(i, BLACK, WHITE, &s);
-			// printf("---color : %f---", color);
 			my_pixel_put(x ,y, &f->img, color);
 			return ;
 		}
 		i++;
 	}
-	//we are in mandelbrot set
-	my_pixel_put(x, y, &f->img, RED);
+	my_pixel_put(x, y, &f->img, PURPLE);
 }
 
-void	fractol_render(t_fractol *f)
+void	fractol_render(t_fractol *f, char **argv)
 {
 	int x;
 	int y;
@@ -70,10 +91,10 @@ void	fractol_render(t_fractol *f)
 		x = 0;
 		while (x < WIDTH)
 		{
-			handle_pixel(x, y, f);
+			handle_pixel(x, y, f, argv);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(f->ptr, f->win, f->img.img_ptr, x, y);
+	mlx_put_image_to_window(f->ptr, f->win, f->img.img_ptr, 0, 0);
 }

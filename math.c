@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 20:40:39 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/03 20:41:40 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/05 20:10:41 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_complex	square_complex(t_complex z)
 	t_complex result;
 
 	result.x = (z.x * z.x) - (z.y * z.y);
-	result.y = (2 * z.x * z.y);
+	result.y = 2 * z.x * z.y;
 	return (result);
 }
 
