@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 00:26:08 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/06 12:17:37 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/06 17:19:50 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void events_init(t_fractol *f)
 	mlx_hook(f->win, 2, 1L<<0, key_handle, f); // f? 1.29.30
 	mlx_hook(f->win, 4, 1L<<2, mouse_handle, f);
 	mlx_hook(f->win, 17, 1L<<17, close_handler, f);
+	mlx_hook(f->win, 6, 1L<<6, mouse_track, f);
 }
 
 void	ft_malloc_error() //may be static

@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:46:15 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/06 12:13:12 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/06 17:31:29 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int key_handle(int keysym, t_fractol *f)
 		f->zoom *= 1.05;
 	else if (keysym == 101)
 		f->zoom *= 0.95;
-	fractol_render(f);
+	fractol_render(f, &f->name);
 	printf ("%d\n", keysym);
 	return (0);
 }
@@ -67,9 +67,25 @@ int	mouse_handle(int button, int x, int y, t_fractol *f)
 	(void)x;
 	(void)y;
 	printf ("%d\n",  button);
-	fractol_render(f);
+	fractol_render(f, &f->name);
 	return (0);
 }
 
 //zoom in, mouse roll frontward
 //zoom out, mouse roll backward
+
+int	mouse_track(int x, int y, t_fractol *f)
+{
+	t_scale s;
+
+	s.old_min = 0;
+	if (ft_strcmp (f->name, "julia") == 0)
+	{
+		s.old_max = WIDTH;
+		f->arg_x = (scale(x, -2, +2, &s) * f->zoom) + f->shift_x;
+		s.old_max = HEIGHT;
+		f->arg_y = (scale(y, +2, -2, &s) * f->zoom) + f->shift_y;
+	}
+	// fractol_render(f, &f->name);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 20:40:39 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/05 20:10:41 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/06 19:21:52 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ t_complex	sum_complexe(t_complex z1, t_complex z2)
 
 	result.x = z1.x + z2.x;
 	result.y = z1.y + z2.y;
+	return (result);
+}
+
+t_complex	sum_semi_complexe(t_complex z1, int z2)
+{
+	t_complex result;
+
+	result.x = z1.x + z2;
+	result.y = z1.y + z2;
 	return (result);
 }
 
