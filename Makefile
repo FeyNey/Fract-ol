@@ -6,12 +6,14 @@ NAME	=	fract-ol
 
 # NAME_BONUS =
 
-SRCS	=		utils.c\
-				main.c\
-				init.c\
-				render.c\
-				math.c\
-				hook.c
+SRCS	=		src/main.c\
+				src/init.c\
+				src/render.c\
+				src/math.c\
+				src/hook.c\
+				src/Mandelbrot.c\
+				src/Julia.c\
+				src/Newton.c
 
 # SRCS_BONUS =
 
