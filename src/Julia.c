@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 00:19:12 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/07 00:38:58 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/07 02:53:24 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	julia_render(int x, int y, t_fractol *f)
 		z = sum_complexe(square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > f->escape_value)
 		{
-			color = scale(i, 0x000000, 0xFFFFFF, &s);
+			color = scale(i, (0x000000 * f->color_shift),
+					(0xFFFFFF * f->color_shift), &s);
 			my_pixel_put(x, y, &f->img, color);
 			return ;
 		}

@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 00:26:08 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/07 00:38:48 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/07 03:25:09 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,23 @@ void	events_init(t_fractol *f)
 	mlx_hook(f->win, 4, 1L << 2, mouse_handle, f);
 	mlx_hook(f->win, 17, 1L << 17, close_handler, f);
 }
-	// mlx_hook(f->win, 6, 1L<<6, mouse_track, f);
+	// mlx_hook(f->win, 6, 1L << 6, mouse_track, f);
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_strncmp(char *s1, char *s2, int size)
 {
 	int	i;
 
 	i = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (1);
-	while (s1[i])
+	while (s1[i] && i < size)
 	{
 		if (s1[i] != s2[i])
 			return (1);
 		i++;
 	}
+	if (i != size)
+		return (1);
 	return (0);
 }
 
@@ -49,6 +51,7 @@ void	data_init(t_fractol *f)
 	f->shift_x = 0;
 	f->shift_y = 0;
 	f->zoom = 1;
+	f->color_shift = 1;
 }
 
 void	fractol_init(t_fractol *f)

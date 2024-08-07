@@ -2,7 +2,7 @@ CC	=	cc
 
 CFLAGS	= -Wall -Wextra -Werror -O3
 
-NAME	=	fract-ol
+NAME	=	fractol
 
 # NAME_BONUS =
 

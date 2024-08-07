@@ -6,7 +6,7 @@
 /*   By: acoste <acoste@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:46:15 by acoste            #+#    #+#             */
-/*   Updated: 2024/08/07 00:38:35 by acoste           ###   ########.fr       */
+/*   Updated: 2024/08/07 17:21:15 by acoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ int	close_handler(t_fractol *f)
 int	key_handle(int keysym, t_fractol *f)
 {
 	if (keysym == 65307)
-	{
 		close_handler(f);
-	}
 	else if (keysym == 65362 || keysym == 119)
 		f->shift_y += (0.5 * f->zoom);
 	else if (keysym == 65364 || keysym == 115)
@@ -41,6 +39,10 @@ int	key_handle(int keysym, t_fractol *f)
 		f->iteration_definition -= 3;
 	else if (keysym == 113)
 		f->zoom *= 1.05;
+	else if (keysym == 99)
+		f->color_shift += 10;
+	else if (keysym == 118)
+		f->color_shift -= 10;
 	else if (keysym == 101)
 		f->zoom *= 0.95;
 	fractol_render(f);
@@ -68,8 +70,6 @@ int	mouse_handle(int button, int x, int y, t_fractol *f)
 	{
 		f->zoom *= 0.95;
 	}
-	(void)x;
-	(void)y;
 	fractol_render(f);
 	return (0);
 }
